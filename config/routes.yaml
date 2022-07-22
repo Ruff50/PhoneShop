@@ -1,7 +1,7 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
-# the "app_lucky_number" route name is not important yet
+# the "app_lucky_number" route name is not important yetcc
 app_lucky_number:
     path: /lucky/number
     controller: App\Controller\LuckyController::number
