@@ -3,13 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: '`user`')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -30,19 +28,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $prenom = null;
+    private ?string $fullName = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $nom = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $telephone = null;
-
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $aPropos = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $instagram = null;
+    private ?string $roleName = null;
 
     public function getId(): ?int
     {
@@ -114,62 +103,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getPrenom(): ?string
+    public function getFullName(): ?string
     {
-        return $this->prenom;
+        return $this->fullName;
     }
 
-    public function setPrenom(string $prenom): self
+    public function setFullName(string $fullName): self
     {
-        $this->prenom = $prenom;
+        $this->fullName = $fullName;
 
         return $this;
     }
 
-    public function getNom(): ?string
+    public function getRoleName(): ?string
     {
-        return $this->nom;
+        return $this->roleName;
     }
 
-    public function setNom(string $nom): self
+    public function setRoleName(string $roleName): self
     {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getTelephone(): ?string
-    {
-        return $this->telephone;
-    }
-
-    public function setTelephone(string $telephone): self
-    {
-        $this->telephone = $telephone;
-
-        return $this;
-    }
-
-    public function getAPropos(): ?string
-    {
-        return $this->aPropos;
-    }
-
-    public function setAPropos(?string $aPropos): self
-    {
-        $this->aPropos = $aPropos;
-
-        return $this;
-    }
-
-    public function getInstagram(): ?string
-    {
-        return $this->instagram;
-    }
-
-    public function setInstagram(string $instagram): self
-    {
-        $this->instagram = $instagram;
+        $this->roleName = $roleName;
 
         return $this;
     }

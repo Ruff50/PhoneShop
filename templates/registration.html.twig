@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+	<input type="reset" class="btn btn-secondary d-inline-flex float-end" value="Retour" onclick="history.go(-1)">
+	<main class="col-4 m-auto text-center">
+
+		<img loading="eager" src="/images/logo.png" alt="logo du site" title="" style="width: 100px;height: 100px;" class="mb-3">
+
+		<form action="/user/registration/add">
+
+			<h1 class="h3 mb-3 fw-normal text-center">Création de compte</h1>
+			<div class="form-floating">
+				<label for="name">Nom complet</label>
+				<input type="text" class="form-control mb-1 mt-1" id="name" name="name" placeholder="saisissez votre nom" required>
+
+			</div>
+			<div class="form-floating">
+				<label for="mail">Adresse mail</label>
+				<input type="email" class="form-control mb-1 mt-1" id="mail" name="mail" placeholder="name@example.com" required>
+
+			</div>
+			<div class="form-floating">
+				<label for="repeatMail">Répetez l'adresse mail</label>
+				<input type="email" class="form-control mb-1 mt-1" id="repeatMail" placeholder="name@example.com" required>
+
+			</div>
+			<div class="form-floating">
+				<label for="motDePasse">Mot de passe</label>
+				<input type="password" class="form-control mb-1" id="motDePasse" name="motDePasse" placeholder="Password" required>
+
+			</div>
+			<div class="form-floating">
+				<label for="repeatMotDePasse">Répetez le mot de passe</label>
+				<input type="password" class="form-control mb-1" id="repeatMotDePasse" name="repeatMotDePasse" placeholder="Password" required>
+
+			</div>
+			<select class="form-select mb-2" aria-label="Default select example" name="role" required>
+				<option value="ROLE_USER" selected>Sélectioner un rôle</option>
+				<option value="ROLE_SUPER_ADMIN">Administrateur</option>
+				<option value="ROLE_COMPTA">Comptabilite</option>
+				<option value="ROLE_CHEF">Chef-chantier</option>
+				<option value="ROLE_CONDUCTEUR">Conducteur-Travaux</option>
+				<option value="ROLE_RESPONSABLE">Responsable</option>
+			</select>
+
+			<button class="w-100 btn btn-lg btn-primary" type="submit" id="newUser">Créer le compte</button>
+
+		</form>
+	</main>
+
+	{% if error %}
+		<div>{{ error }}</div>
+	{% endif %}
+
+
+	<p class="mt-5 mb-3 text-center">&copy; PhoneShop</p>
+
+
+{% endblock %}

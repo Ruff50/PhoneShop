@@ -10,21 +10,22 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220722073750 extends AbstractMigration
+final class Version20220904134448 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Création de l\'entité User';
+        return '';
     }
 
     public function up(Schema $schema): void
     {
+        // this up() migration is auto-generated, please modify it to your needs
+        $this->addSql('ALTER TABLE user ADD role_name VARCHAR(255) NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP TABLE `user`');
-        $this->addSql('DROP TABLE messenger_messages');
+        $this->addSql('ALTER TABLE user DROP role_name');
     }
 }

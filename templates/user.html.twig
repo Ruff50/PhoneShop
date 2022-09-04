@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+	{{ encore_entry_link_tags('formUser') }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ encore_entry_script_tags('formUser') }}
+{% endblock %}
+
+{% block nav %}{% endblock %}
+
+{% block body %}
+
+
+	<main class="form-signin w-100 m-auto text-center">
+
+		<img loading="eager" src="https://i0.wp.com/soltech-reunion.fr/wp-content/uploads/2017/07/logo-transparent-400x333.png?resize=400%2C333" alt="logo transparent" title="" class="wp-image-284 jetpack-lazy-image jetpack-lazy-image--handled" data-recalc-dims="1" srcset="https://i0.wp.com/soltech-reunion.fr/wp-content/uploads/2017/07/logo-transparent-400x333.png?resize=400%2C333&amp;ssl=1 400w,
+			    		https://i0.wp.com/soltech-reunion.fr/wp-content/uploads/2017/07/logo-transparent-400x333.png?resize=300%2C250&amp;ssl=1 300w" data-lazy-loaded="1" sizes="(max-width: 200px) 130vw, 200px" width="auto" height="auto">
+		<form action="/user/compte/update">
+			<h1 class="h3 mb-3 fw-normal text-center">Mon compte</h1>
+
+			<div class="form-floating">
+				<input type="email" class="form-control" id="mail" value="{{ app.user.email }}" required disabled>
+				<label for="mail">Adresse mail</label>
+			</div>
+			<div class="form-floating">
+				<input type="password" class="form-control mb-1" id="currentMotDePasse" name="currentMotDePasse" data-id="{{ app.user.id }}" placeholder="Password" autocomplete="off" required>
+				<label for="currentMotDePasse">Mot de passe</label>
+			</div>
+
+			<div class="form-floating">
+				<input type="password" class="form-control mb-1" id="newMotDePasse" name="newMotDePasse" placeholder="Password" required disabled>
+				<label for="newMotDePasse">Nouveau mot de passe</label>
+			</div>
+			<div class="form-floating">
+				<input type="password" class="form-control mb-1" id="repeatNewMotDePasse" name="repeatNewMotDePasse" placeholder="Password" required disabled>
+				<label for="repeatMotDePasse">Répetez le nouveau mot de passe</label>
+			</div>
+
+			<input type="hidden" name="idUser" value="{{ app.user.id }}">
+			<button class="w-100 btn btn-lg btn-primary" type="submit" id="modifUser" disabled>Modifier le mot de passe</button>
+		</form>
+
+		{% if error %}
+			<div>{{ error }}</div>
+		{% endif %}
+
+		<div class="mt-5 mb-3 text-muted text-center"><input type="reset" class="btn btn-secondary" value="Retour" onclick="history.go(-1)"></div>
+		<p class="mt-5 mb-3 text-muted text-center">&copy; Soltech</p>
+	</main>
+
+{% endblock %}
+
+{% block footer %}{% endblock %}

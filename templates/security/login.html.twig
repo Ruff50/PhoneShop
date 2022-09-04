@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+
+	<main class="col-4 m-auto text-center">
+		<form action="{{ path('app_login') }}" method="post">
+			{% if error %}
+				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+			{% endif %}
+			<img loading="eager" src="/images/logo.png" alt="logo du site" title="" style="width: 100px;height: 100px;" class="mb-3">
+			<h1 class="h3 mb-3 fw-normal text-center">Connexion</h1>
+
+			<div class="form-floating">
+				<label for="inputEmail">Adresse mail</label>
+				<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-1 mt-1" autocomplete="email" required autofocus>
+			</div>
+			<div class="form-floating">
+				<label for="inputPassword">Password</label>
+				<input type="password" name="password" id="inputPassword" class="form-control mb-1 mt-1" autocomplete="current-password" required>
+			</div>
+
+			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+			<button class="w-100 btn btn-lg btn-primary mb-1 mt-1" type="submit">Connexion</button>
+
+		</form>
+	</main>
+
+	<p class=" mt-5 mb-3 text-center">&copy; PhoneShop</p>
+
+
+{% endblock %}

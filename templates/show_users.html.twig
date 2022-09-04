@@ -1,0 +1,183 @@
+{% extends 'base.html.twig' %}
+{# 
+{% block stylesheets %}
+	{{ encore_entry_link_tags('listeUser') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('listeUser') }}
+{% endblock %}
+
+{% block nav %}
+{% endblock %}  #}
+
+{% block body %}
+
+	<div class="flex justify-content-center align-middle mx-auto" style="width:95%;">
+		<div class='text-center position-relative'>
+			<img loading="eager" src="/images/logo.png" alt="logo du site" title="" style="width: 100px;height: 100px;">
+		</div>
+		<div class="table-responsive mt-5">
+
+			<div class="table-title">
+				<div class="flex justify-content-center align-middle mx-auto">
+
+					<h1 class="text-uppercase text-center">Gestion des Utilisateurs</h1>
+
+
+				</div>
+			</div>
+			<table class="table table-bordered border-white table-hover" id="users-table">
+				<thead>
+					<tr class="firstligne bg-opacity-60 text-danger">
+						<th>Nom</th>
+						<th>Email</th>
+						<th>Role</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody class="table-group-divider" style="border-top-color:black">
+					{% if is_granted('ROLE_SUPER_ADMIN') %}
+						{% for user in listeUsers %}
+							<tr data-id="{{ user.id }}">
+								<td>{{ user.fullName }}</td>
+								<td>{{ user.email }}</td>
+								<td>{{ user.roleName }}</td>
+								<td>
+									<span class="mx-2">
+										<span class="editModal" title="Modifier" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="blue" class="bi bi-pencil-square" viewbox="0 0 16 16" data-toggle="tooltip" title="Edit">
+												<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+												<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+											</svg>
+										</span>
+									</span>
+									<span title="Supprimer" class="modalClick" name="supprUser" data-bs-toggle="modal" data-bs-target="#deleteEmployeeModal">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-trash" viewbox="0 0 16 16" data-toggle="tooltip" title="Delete">
+											<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+											<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+										</svg>
+									</span>
+								</td>
+							</tr>
+						{% endfor %}
+						{% else%}
+						<tr data-id="{{ listeUsers.id }}">
+							<td>{{ listeUsers.fullName }}</td>
+							<td>{{ listeUsers.email }}</td>
+							<td>{{ listeUsers.roleName }}</td>
+							<td>
+								<span class="mx-2">
+									<span class="editModal" title="Modifier" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="blue" class="bi bi-pencil-square" viewbox="0 0 16 16" data-toggle="tooltip" title="Edit">
+											<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+											<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+										</svg>
+									</span>
+								</span>
+							</td>
+						</tr>
+						{% endif%}
+					</tbody>
+				</tbody>
+			</table>
+			<div class="float-end">
+				<button type="button" class="btn btn-secondary" onclick="history.go(-1)">Retour</button>
+				{% if is_granted('ROLE_SUPER_ADMIN') %}
+					<a href="#" class="btn btn-primary" id="ajtUtil" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewbox="0 0 16 16">
+							<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+							<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+						</svg>
+						<span class="mx-2">Ajouter un Nouvel Utilisateur</span>
+					</a>
+
+				{% endif %}
+
+			</div>
+
+		</div>
+	</div>
+
+
+	<!-- Add Modal HTML -->
+	<div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="ajouterunuser" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<section class="text-start">
+					<div class="modal-header">
+						<h4 class="modal-title" id="toggle-t">Ajouter un Utilisateur</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label>Nom</label>
+							<input type="text" class="form-control" name="name" id="inpname" required>
+
+						</div>
+						<div class="form-group">
+							<label>Email</label>
+							<input type="email" class="form-control" name="email" id="inpemail" required>
+						</div>
+						<div class="form-group">
+							<label for="motDePasse">Mot de passe</label>
+							<input type="password" class="form-control mb-1" id="motDePasse" name="motDePasse" placeholder="Password" required>
+
+						</div>
+						<div class="form-group" id="toggle-div" style='display:none;'>
+							<label for="NewmotDePasse">Nouveau Mot de passe</label>
+							<input type="password" class="form-control mb-1" id="NewmotDePasse" name="NewmotDePasse" placeholder="Password">
+
+						</div>
+						<div class="form-group">
+							<label for="repeatMotDePasse">Répetez le mot de passe</label>
+							<input type="password" class="form-control mb-1" id="repeatMotDePasse" name="repeatMotDePasse" placeholder="Password" required>
+						</div>
+						<div class="form-group">
+							<select class="form-select mb-2" aria-label="Default select example" name="role" id="selrole" required>
+								<option value="ROLE_USER" selected>Sélectioner un rôle</option>
+								<option value="ROLE_SUPER_ADMIN">Administrateur</option>
+								<option value="ROLE_COMPTA">Comptabilite</option>
+								<option value="ROLE_CHEF">Chef-chantier</option>
+								<option value="ROLE_CONDUCTEUR">Conducteur-Travaux</option>
+								<option value="ROLE_RESPONSABLE">Responsable</option>
+							</select>
+						</div>
+					</div>
+
+					<div id='alertEdit' class="alert alert-danger" role="alert" style='display:none;'></div>
+
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Annuler">
+						<input id="ajout-btn" type="submit" name="submit" class="btn btn-primary" value="Ajouter">
+						<input id="modif-btn" type="submit" name="submit" class="btn btn-primary" value="Modifier" style='display:none;'>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+	<!-- Delete Modal HTML -->
+	<div class="modal fade" id="deleteEmployeeModal" tabindex="-1" aria-labelledby="supprunuser" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Supprimer un Utilisateur</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p>Êtes-vous sûr de vouloir supprimer cet utilisateur ?</p>
+					<p class="text-warning">
+						<small>Cette action est irréversible !</small>
+					</p>
+				</div>
+				<div id='alertSuppr' class="alert alert-success" role="alert" style='display:none;'></div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Annuler">
+					<input data-user="" data-dismiss="dialog" id="btnSupprUser" type="submit" class="btn btn-danger" value="Supprimer">
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</div>{% endblock %}
