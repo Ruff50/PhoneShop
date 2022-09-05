@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
-{# 
-{% block stylesheets %}
+
+{# {% block stylesheets %}
 	{{ encore_entry_link_tags('listeUser') }}
-{% endblock %}
+{% endblock %} #}
 
 {% block javascripts %}
-    {{ encore_entry_script_tags('listeUser') }}
+	{{ encore_entry_script_tags('listeUser') }}
 {% endblock %}
 
-{% block nav %}
+{# {% block nav %}
 {% endblock %}  #}
 
 {% block body %}
@@ -99,7 +99,6 @@
 		</div>
 	</div>
 
-
 	<!-- Add Modal HTML -->
 	<div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="ajouterunuser" aria-hidden="true">
 		<div class="modal-dialog">
@@ -145,12 +144,12 @@
 						</div>
 					</div>
 
-					<div id='alertEdit' class="alert alert-danger" role="alert" style='display:none;'></div>
+					<div id="alertEdit" class="alert alert-danger" role="alert" style="display:none;"></div>
 
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Annuler">
 						<input id="ajout-btn" type="submit" name="submit" class="btn btn-primary" value="Ajouter">
-						<input id="modif-btn" type="submit" name="submit" class="btn btn-primary" value="Modifier" style='display:none;'>
+						<input id="modif-btn" type="submit" name="submit" class="btn btn-primary" value="Modifier" style="display:none;">
 					</div>
 				</section>
 			</div>

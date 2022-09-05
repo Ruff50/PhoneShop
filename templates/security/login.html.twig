@@ -14,15 +14,15 @@
 
 			<div class="form-floating">
 				<label for="inputEmail">Adresse mail</label>
-				<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-1 mt-1" autocomplete="email" required autofocus>
+				<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-2 mt-2" autocomplete="email" required autofocus>
 			</div>
 			<div class="form-floating">
 				<label for="inputPassword">Password</label>
-				<input type="password" name="password" id="inputPassword" class="form-control mb-1 mt-1" autocomplete="current-password" required>
+				<input type="password" name="password" id="inputPassword" class="form-control mb-2 mt-2" autocomplete="current-password" required>
 			</div>
 
 			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-			<button class="w-100 btn btn-lg btn-primary mb-1 mt-1" type="submit">Connexion</button>
+			<button class="w-100 btn btn-lg btn-primary mb-2 mt-2" type="submit">Connexion</button>
 
 		</form>
 	</main>

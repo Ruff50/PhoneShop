@@ -67,6 +67,7 @@ class UserController extends AbstractController
         if ($connect) {
             $idconnect = $connect->getId();
 
+
             if ($connect->getRoles()[0] == "ROLE_SUPER_ADMIN") {
                 $user = $entityManager->getRepository('App\Entity\User')->findAll();
                 return $this->render('show_users.html.twig', [
@@ -131,7 +132,7 @@ class UserController extends AbstractController
                 'Aucun utilisateur trouvé avec l\`identifiant : ' . $id
             );
         }
-        return new JsonResponse(['name' => $user->getName(), 'email' => $user->getEmail(), 'roles' => $user->getRoles()]);
+        return new JsonResponse(['name' => $user->getFullName(), 'email' => $user->getEmail(), 'roles' => $user->getRoles()]);
     }
 
     /**
