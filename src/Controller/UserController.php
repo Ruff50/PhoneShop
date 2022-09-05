@@ -222,7 +222,7 @@ class UserController extends AbstractController
         if ($request->query->get('name') == "") {
             return new JsonResponse(['error' => 'Veuillez saisir votre nom svp...']);
         } else {
-            $user->setNom($request->query->get('name'));
+            $user->setFullName($request->query->get('name'));
         }
         if ($request->query->get('email') == "") {
             return new JsonResponse(['error' => 'Veuillez saisir votre e-mail svp...']);
