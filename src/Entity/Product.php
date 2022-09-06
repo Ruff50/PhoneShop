@@ -41,6 +41,9 @@ class Product
     #[ORM\Column]
     private ?int $Qte = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
     #[ORM\ManyToOne(inversedBy: 'products')]
     private ?Category $category = null;
 
@@ -152,6 +155,17 @@ class Product
     public function setQte(int $Qte): self
     {
         $this->Qte = $Qte;
+
+        return $this;
+    }
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
