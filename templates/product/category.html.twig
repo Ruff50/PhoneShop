@@ -15,8 +15,12 @@
 		</ol>
 	</nav>
 
-	<h1>Catégorie :
-		{{category.nom}}</h1>
+	<h1 style="color:#e15a97; text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
+				0px -5px 35px rgba(255,255,255,0.3),
+				1px 1px 1px rgba(0,0,0,0.7);">
+		<span class="badge bg-dark">Catégorie :
+			{{category.nom}}</span>
+	</h1>
 	<div class="row">
 		{% for p in category.products%}
 			<div class="col-3">
