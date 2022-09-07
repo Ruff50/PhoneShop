@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
-
+{% block javascripts %}
+	{{ encore_entry_script_tags('app') }}
+{% endblock %}
 {% block body %}
 	<h1 style="color:black;text-shadow:
 									-1px -1px 0 #fff,
@@ -9,27 +11,29 @@
 									1px 1px 2px #141414;
 									color:#333;font-size: 3em;">NOS OFFRES SPÉCIALES !</h1>
 	<div class="row">
-		{% for p in products %}
-			<div class="col">
-				<div class="card">
-					<img src="{{p.image}}" class="img-fluid" alt="Image du produit">
-				</div>
-				<div class="card-body">
-					<h4 class="card-title">{{p.nom}}
-						({{p.prix}}
-						&euro;)</h4>
-					<h5>
-						<span class="badge bg-dark">
-							{{p.getCategory().getNom()}}
-						</span>
-					</h5>
-					<p class="card-text">{{p.designation}}</p>
+		<div class="morph d-flex justify-content-center">
+			{% for p in products %}
+				<div class="col">
+					<div class="card align-items-center mx-2 bg-light">
+						<img src="{{p.image}}" class="img-fluid" alt="Image du produit">
+					</div>
+					<div class="card-body">
+						<h4 class="card-title">{{p.nom}}
+							({{p.prix}}
+							&euro;)</h4>
+						<h5>
+							<span class="badge bg-dark">
+								{{p.getCategory().getNom()}}
+							</span>
+						</h5>
+						<p class="card-text">{{p.designation}}</p>
 
-					<a href=" {{path('product_show', {'category_slug' : p.category.slug, 'slug': p.slug} )}}" class="btn btn-primary btn-sm">Détails</a>
-					<a href="#" class="btn btn-success btn-sm">Ajouter</a>
+						<a href=" {{path('product_show', {'category_slug' : p.category.slug, 'slug': p.slug} )}}" class="btn btn-primary btn-sm">Détails</a>
+						<a href="#" class="btn btn-success btn-sm">Ajouter</a>
+					</div>
 				</div>
-			</div>
-		{% endfor %}
+			{% endfor %}
+		</div>
 	</div>
 	<hr>
 	<h1 style="color:#e15a97; text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -5px 35px rgba(255,255,255,0.3), 1px 1px 1px rgba(0,0,0,0.7);">

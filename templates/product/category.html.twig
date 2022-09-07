@@ -16,16 +16,16 @@
 	</nav>
 
 	<h1 style="color:#e15a97; text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
-				0px -5px 35px rgba(255,255,255,0.3),
-				1px 1px 1px rgba(0,0,0,0.7);">
+																																																																			0px -5px 35px rgba(255,255,255,0.3),
+																																																																			1px 1px 1px rgba(0,0,0,0.7);">
 		<span class="badge bg-dark">Catégorie :
 			{{category.nom}}</span>
 	</h1>
 	<div class="row">
 		{% for p in category.products%}
 			<div class="col-3">
-				<div class="card">
-					<img src="{{p.image}}" class="img-fluid" alt="Image du produit">
+				<div class="card" style="border-radius: 6%;">
+					<img src="{{p.image}}" class="img-fluid" alt="Image du produit" style="width: 400px; height:260px; border-radius: 6%;">
 				</div>
 				<div class="card-body">
 					<h4 class="card-title">{{p.nom}}
