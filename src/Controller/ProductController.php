@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ProductController extends AbstractController
 {
@@ -56,7 +57,7 @@ class ProductController extends AbstractController
     /**
      * @Route("admin/product/{id}/edit", name="product_edit")
      */
-    public function edit($id, ProductRepository $productRepository, SluggerInterface $slugger, Request $request, EntityManagerInterface $em): Response
+    public function edit($id, ProductRepository $productRepository, SluggerInterface $slugger, Request $request, EntityManagerInterface $em, ValidatorInterface $validator): Response
 
     {
 
