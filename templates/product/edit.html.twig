@@ -20,9 +20,12 @@
 			{{ form_row(form.tva) }}
 		</div>
 		<div class="col">
-			{{ form_row(form.image) }}
-			{{ form_row(form.quantite) }}
-			{{ form_row(form.categorie) }}
+			<span class="d-flex flex-row">
+				{{ form_row(form.image) }}
+				<img src="/uploads/images/{{product.image}}" alt="{{product.nom}}" style="width:300px;height:auto;border-radius: 6%;">
+			</span>
+			{{ form_row(form.Qte) }}
+			{{ form_row(form.category) }}
 
 		</div>
 	</div>

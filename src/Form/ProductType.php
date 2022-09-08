@@ -2,8 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Product;
-
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -45,13 +46,14 @@ class ProductType extends AbstractType
             ])
             ->add('image', FileType::class, [
                 'label' => 'Image du produit',
+                'data_class' => null,
             ])
-            ->add('quantite', IntegerType::class, [
+            ->add('Qte', IntegerType::class, [
                 'label' => 'Quantité du produit',
                 'attr' => ['placeholder' => 'Saisissez la quantité du produit']
             ])
 
-            ->add('category_id', EntityType::class, [
+            ->add('category', EntityType::class, [
                 'label' => 'Catégorie du produit',
                 'placeholder' => '--Choisissez une catégorie--',
                 'class' => Category::class,

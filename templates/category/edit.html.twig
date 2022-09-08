@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Modifier une catégorie
+{% endblock %}
+{% block body %}
+	<h1>Modifier la catégorie
+		{{category.nom}}</h1>
+
+	{{ form_start(form) }}
+	<div class="row">
+		<div class="col">
+			{{ form_row(form.nom) }}
+			<span class="d-flex flex-row mt-3">
+				{{ form_row(form.image) }}
+				<img src="/uploads/images/{{category.image}}" alt="{{category.nom}}" style="width:300px;height:auto;border-radius: 6%;">
+			</span>
+		</div>
+	</div>
+	<button type="submit" class="btn btn-primary">
+		<i class="fa fa-save"></i>
+		Modifier
+	</button>
+	{{ form_end(form) }}
+{% endblock %}
