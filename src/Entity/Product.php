@@ -29,12 +29,6 @@ class Product
     #[ORM\Column]
     private ?float $tva = null;
 
-    #[ORM\Column]
-    private ?bool $actif = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $codeart = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
@@ -108,30 +102,6 @@ class Product
     public function setTva(float $tva): self
     {
         $this->tva = $tva;
-
-        return $this;
-    }
-
-    public function isActif(): ?bool
-    {
-        return $this->actif;
-    }
-
-    public function setActif(bool $actif): self
-    {
-        $this->actif = $actif;
-
-        return $this;
-    }
-
-    public function getCodeart(): ?string
-    {
-        return $this->codeart;
-    }
-
-    public function setCodeart(string $codeart): self
-    {
-        $this->codeart = $codeart;
 
         return $this;
     }
