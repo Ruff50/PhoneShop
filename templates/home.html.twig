@@ -4,21 +4,21 @@
 {% endblock %}
 {% block body %}
 	<h1 style="color:black;text-shadow:
-									-1px -1px 0 #fff,
-									1px -1px 0 #fff,
-									-1px 1px 0 #fff,
-									1px 1px 0 #fff,
-									1px 1px 2px #141414;
-									color:#333;font-size: 3em;">NOS OFFRES SPÉCIALES !</h1>
+				-1px -1px 0 #fff,
+				1px -1px 0 #fff,
+				-1px 1px 0 #fff,
+				1px 1px 0 #fff,
+				1px 1px 2px #141414;
+				color:#333;font-size: 3em;">NOS OFFRES SPÉCIALES !</h1>
 	<div class="row">
 		<div class="morph d-flex justify-content-center">
 			{% for p in products %}
 				<div class="col">
 					<div class="card align-items-center mx-2 bg-light">
-						<img src="{{p.image}}" class="img-fluid" alt="Image du produit">
+						<img src="/uploads/images/{{p.image}}" class="img-fluid" alt="Image du produit">
 					</div>
 					<div class="card-body">
-						<h4 class="card-title">{{p.nom}}
+						<h4 class="card-title mt-3">{{p.nom}}
 							({{p.prix}}
 							&euro;)</h4>
 						<h5>
@@ -39,26 +39,26 @@
 	<h1 style="color:#e15a97; text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -5px 35px rgba(255,255,255,0.3), 1px 1px 1px rgba(0,0,0,0.7);">
 		<span class="badge bg-secondary">Un service irréprochable</span>
 	</h1>
-	<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere, aut! cum, hic? sed aperiam?</p>
+	<p>Les 3 bonnes raisons de choisir PhoneShop</p>
 	<div class="row">
 		{% include "shared/_assurance.html.twig" with {
 		            'color': 'primary',
 		            'icone':'fas fa-truck',
-		            'text' : "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere, aut! cum, hic? sed aperiam?"
+		            'text' : "Une livraison rapide et soignée Grâce à notre partenaire logistique, nous nous engageons à expédier le jour même toute commande passée avant 13H du lundi au vendredi pour une livraison soignée en 24 ou 48h."
 		
 		}
 		%}
 		{% include "shared/_assurance.html.twig" with {
 		            'color': 'success',
 		            'icone':'fas fa-check',
-		            'text' : "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere, aut! cum, hic? sed aperiam?"
+		            'text' : "Des conseils d'experts Passionnée par la téléphonie, la radiocommunication et les produits high tech, notre équipe de conseillers qualifiés est à votre écoute pour vous accompagner avant et après votre achat"
 		
 		}
 		%}
 		{% include "shared/_assurance.html.twig" with {
 		            'color': 'warning',
 		            'icone':'fas fa-lock',
-		            'text' : "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere, aut! cum, hic? sed aperiam?"
+		            'text' : "Un site sécurisé PhoneShop vous assure des achats 100% protégés grâce à la  technologie SSL utilisée sur toutes les pages du site et un paiement en ligne 100% sécurisé avec HiPay"
 		
 		}
 		%}
