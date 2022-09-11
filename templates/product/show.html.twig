@@ -21,16 +21,18 @@
 		({{product.prix}}
 		€)</h1>
 	<div class="row">
-		<div class="col-4">
-			<img src="{{product.image}}" alt="{{product.nom}}" class="img-fluid" style="width: 600px; height:auto; border-radius: 10%;">
+		<div class="col-md-4">
+			<img src="/uploads/images/{{product.image}}" alt="{{product.nom}}" class="img-fluid" style="width: 600px; height:auto; border-radius: 10%;">
 
 		</div>
-		<div class="col-8">
+		<div class="col-md-8">
 
 
-			<span class="badge bg-primary">
-				{{product.category.nom}}
-			</span>
+			<h4>
+				<span class="badge bg-primary">
+					{{product.category.nom}}
+				</span>
+			</h4>
 
 			<p>{{product.designation}}</p>
 			<div class="d-flex flex-row justify-between align-center">
