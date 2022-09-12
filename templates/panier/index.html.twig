@@ -13,22 +13,43 @@
 				<th>Prix</th>
 				<th>Quantité</th>
 				<th>Total</th>
+				<th>Action</th>
+
 			</tr>
 		</thead>
 		<tbody>
 			{% for item in details %}
 				<tr>
 					<td>{{ item.product.nom }}</td>
-					<td>{{ item.product.prix }}</td>
-					<td>{{ item.quantity }}</td>
-					<td>{{ item.quantity*item.product.prix }}</td>
+					<td>{{ item.product.prix }}
+						€</td>
+					<td>
+						<a href="{{ path('panier_add',{"id":item.product.id}) }}?returnToPanier=true" class="btn btn-sm btn-primary">
+							<i class="fas fa-plus"></i>
+						</a>
+
+						{{ item.quantity }}
+						<a href="{{ path('panier_decrement',{"id":item.product.id}) }}" class="btn btn-sm btn-primary">
+							<i class="fas fa-minus"></i>
+						</a>
+
+					</td>
+					<td>{{ item.quantity*item.product.prix }}
+						€</td>
+					<td>
+						<a href="{{ path('panier_delete', {'id': item.product.id}) }}" class="btn btn-sm btn-danger">
+							<i class="fas fa-trash"></i>
+
+						</a>
+					</td>
 				</tr>
 			{% endfor %}
 		</tbody>
 		<tfoot>
 			<tr>
 				<td colspan="3">Total :</td>
-				<td>{{ total }}</td>
+				<td colspan="2">{{ total }}
+					€</td>
 			</tr>
 		</tfoot>
 	</table>
