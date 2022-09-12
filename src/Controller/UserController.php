@@ -157,14 +157,10 @@ class UserController extends AbstractController
             return new JsonResponse(['error' => 'Vous devez obligatoirement sélectionner un rôle dans la zone de liste...']);
         } else if ($request->query->get('role') == 'ROLE_SUPER_ADMIN') {
             $roleName = 'administrateur';
-        } else if ($request->query->get('role') == 'ROLE_COMPTA') {
-            $roleName = 'comptable';
-        } else if ($request->query->get('role') == 'ROLE_CHEF') {
-            $roleName = 'chef de travaux';
-        } else if ($request->query->get('role') == 'ROLE_CONDUCTEUR') {
-            $roleName = 'conducteur de travaux';
-        } else if ($request->query->get('role') == 'ROLE_RESPONSABLE') {
-            $roleName = 'responsable';
+        } else if ($request->query->get('role') == 'ROLE_MOD') {
+            $roleName = 'modérateur';
+        } else if ($request->query->get('role') == 'ROLE_CLI') {
+            $roleName = 'client';
         }
 
         $user->setRoles([$request->query->get('role')]);
@@ -234,14 +230,10 @@ class UserController extends AbstractController
             return new JsonResponse(['error' => 'Vous devez obligatoirement sélectionner un rôle dans la zone de liste...']);
         } else if ($request->query->get('role') == 'ROLE_SUPER_ADMIN') {
             $roleName = 'administrateur';
-        } else if ($request->query->get('role') == 'ROLE_COMPTA') {
-            $roleName = 'comptable';
-        } else if ($request->query->get('role') == 'ROLE_CHEF') {
-            $roleName = 'chef de travaux';
-        } else if ($request->query->get('role') == 'ROLE_CONDUCTEUR') {
-            $roleName = 'conducteur de travaux';
-        } else if ($request->query->get('role') == 'ROLE_RESPONSABLE') {
-            $roleName = 'responsable';
+        } else if ($request->query->get('role') == 'ROLE_MOD') {
+            $roleName = 'modérateur';
+        } else if ($request->query->get('role') == 'ROLE_CLI') {
+            $roleName = 'client';
         }
         $user->setRoles([$request->query->get('role')]);
         $user->setRoleName($roleName);
@@ -365,14 +357,10 @@ class UserController extends AbstractController
             $roleName = 'utilisateur';
         } else if ($request->query->get('role') == 'ROLE_SUPER_ADMIN') {
             $roleName = 'administrateur';
-        } else if ($request->query->get('role') == 'ROLE_COMPTA') {
-            $roleName = 'comptable';
-        } else if ($request->query->get('role') == 'ROLE_CHEF') {
-            $roleName = 'chef de travaux';
-        } else if ($request->query->get('role') == 'ROLE_CONDUCTEUR') {
-            $roleName = 'conducteur de travaux';
-        } else if ($request->query->get('role') == 'ROLE_RESPONSABLE') {
-            $roleName = 'responsable';
+        } else if ($request->query->get('role') == 'ROLE_MOD') {
+            $roleName = 'modérateur';
+        } else if ($request->query->get('role') == 'ROLE_CLI') {
+            $roleName = 'client';
         }
 
         $user = new User(); // création du nouvel utilisateur dans la BDD
