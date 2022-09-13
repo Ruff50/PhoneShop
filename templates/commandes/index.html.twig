@@ -13,6 +13,7 @@
 					<th>Numéro de commande</th>
 					<th>Adresse de livraison</th>
 					<th>Date de commande</th>
+					<th>Produits</th>
 					<th>Total de la commande</th>
 				</tr>
 			</thead>
@@ -28,8 +29,19 @@
 
 					</td>
 					<td>{{p.date | date('d/m/Y H:i')}}</td>
-					<td>{{p.total}}
-						€</td>
+					<td>
+						<ul>
+							{% for product in p.commandeDetails%}
+								<li>{{product.Qte}}x
+									{{product.produitNom}}
+									=
+									{{product.total}}
+									€
+								</li>
+							{% endfor %}
+						</ul>
+					</td>
+					<td>{{p.total}}€</td>
 				</tr>
 			{% endfor %}
 		</tbody>

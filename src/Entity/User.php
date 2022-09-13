@@ -38,13 +38,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Commande::class)]
     private Collection $commandes;
 
-    #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Avis::class)]
-    private Collection $avis;
-
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
-        $this->avis = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -165,36 +161,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($commande->getUser() === $this) {
                 $commande->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Avis>
-     */
-    public function getAvis(): Collection
-    {
-        return $this->avis;
-    }
-
-    public function addAvi(Avis $avi): self
-    {
-        if (!$this->avis->contains($avi)) {
-            $this->avis[] = $avi;
-            $avi->setUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAvi(Avis $avi): self
-    {
-        if ($this->avis->removeElement($avi)) {
-            // set the owning side to null (unless already changed)
-            if ($avi->getUtilisateur() === $this) {
-                $avi->setUtilisateur(null);
             }
         }
 
