@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Commande;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -37,11 +38,7 @@ class PanierConfirmType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Ville pour la livraison',
                 ],
-            ])
-            ->add('total')
-            ->add('date')
-            ->add('status')
-            ->add('user');
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -5,45 +5,47 @@
 
 {% block body %}
 	<h1>Votre panier</h1>
-
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Produit</th>
-				<th>Prix</th>
-				<th>Quantité</th>
-				<th>Total</th>
-				<th>Action</th>
-
-			</tr>
-		</thead>
-		<tbody>
-			{% for item in details %}
+	{% if (details) %}
+		<table class="table">
+			<thead>
 				<tr>
-					<td>{{ item.product.nom }}</td>
-					<td>{{ item.product.prix }}
-						€</td>
-					<td>
-						<a href="{{ path('panier_add',{"id":item.product.id}) }}?returnToPanier=true" class="btn btn-sm btn-primary">
-							<i class="fas fa-plus"></i>
-						</a>
+					<th>Produit</th>
+					<th>Prix</th>
+					<th>Quantité</th>
+					<th>Total</th>
+					<th>Action</th>
 
-						{{ item.quantity }}
-						<a href="{{ path('panier_decrement',{"id":item.product.id}) }}" class="btn btn-sm btn-primary">
-							<i class="fas fa-minus"></i>
-						</a>
-
-					</td>
-					<td>{{ item.quantity*item.product.prix }}
-						€</td>
-					<td>
-						<a href="{{ path('panier_delete', {'id': item.product.id}) }}" class="btn btn-sm btn-danger">
-							<i class="fas fa-trash"></i>
-
-						</a>
-					</td>
 				</tr>
-			{% endfor %}
+			</thead>
+			<tbody>
+
+				{% for item in details %}
+					<tr>
+						<td>{{ item.product.nom }}</td>
+						<td>{{ item.product.prix }}
+							€</td>
+						<td>
+							<a href="{{ path('panier_add',{"id":item.product.id}) }}?returnToPanier=true" class="btn btn-sm btn-primary">
+								<i class="fas fa-plus"></i>
+							</a>
+
+							{{ item.quantity }}
+							<a href="{{ path('panier_decrement',{"id":item.product.id}) }}" class="btn btn-sm btn-primary">
+								<i class="fas fa-minus"></i>
+							</a>
+
+						</td>
+						<td>{{ item.quantity*item.product.prix }}
+							€</td>
+						<td>
+							<a href="{{ path('panier_delete', {'id': item.product.id}) }}" class="btn btn-sm btn-danger">
+								<i class="fas fa-trash"></i>
+
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
 		</tbody>
 		<tfoot>
 			<tr>
@@ -54,10 +56,17 @@
 		</tfoot>
 	</table>
 	<hr>
-	<h2>Confirmez votre commande en remplissant ce formulaire
-	</h2>
-	{{form_start(confirmationForm, {'action': path(panier_confirmation)})}}
-	{{form_widget(confirmationForm)}}
-	<button type="submit" class="btn btn-success">Je confirme!</button>
-	{{form_end(confirmationForm)}}
-{% endblock %}
+	{% if app.user %}
+		<h2>Confirmez votre commande en remplissant ce formulaire
+		</h2>
+		{{form_start(form, {'action': path("panier_confirmation")})}}
+		{{form_widget(form)}}
+		<button type="submit" class="btn btn-success">Je confirme!</button>
+		{{form_end(form)}}
+	{% else %}
+		<h2>Connectez-vous pour confirmer votre commande</h2>
+		<a href="{{ path('app_login') }}" class="btn btn-primary">Se connecter</a>
+	{% endif %}
+{% else %}
+	<h2>Votre panier est vide !</h2>
+{% endif %}{% endblock %}

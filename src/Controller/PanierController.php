@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\PanierConfirmType;
 use App\Panier\PanierService;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,24 +38,20 @@ class PanierController extends AbstractController
     /**
      * @Route("/panier/show", name="panier_show")
      */
-    public function show(SessionInterface $session, ProductRepository $productRepository): Response
+    public function show(SessionInterface $session, ProductRepository $productRepository, PanierService $panierService): Response
     {
-
-        $details = [];
-        $total = 0;
-        foreach ($session->get('panier', []) as $id => $quantity) {
-            $product = $productRepository->find($id);
-            $details[] = [
-                'product' => $product,
-                'quantity' => $quantity
-            ];
-            $total += $product->getPrix() * $quantity;
-        }
+        $form = $this->createForm(PanierConfirmType::class);
+        $formView = $form->createView();
+        $detailspanier = $panierService->getDétailsPanier($session, $productRepository);
+        $total = $panierService->getTotal($session, $productRepository);
         return $this->render('panier/index.html.twig', [
-            'details' => $details,
-            'total' => $total
+            'details' => $detailspanier,
+            'total' => $total,
+            'form' => $formView,
         ]);
     }
+
+
     /**
      * @Route("/panier/delete/{id}", name="panier_delete", requirements={"id" : "\d+"})
      */
