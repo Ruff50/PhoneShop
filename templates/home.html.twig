@@ -3,25 +3,27 @@
 	{{ encore_entry_script_tags('app') }}
 {% endblock %}
 {% block body %}
-	<h1 style="color:black;text-shadow:
-																																																																																																																																																																																																																				-1px -1px 0 #fff,
-																																																																																																																																																																																																																				1px -1px 0 #fff,
-																																																																																																																																																																																																																				-1px 1px 0 #fff,
-																																																																																																																																																																																																																				1px 1px 0 #fff,
-																																																																																																																																																																																																																				1px 1px 2px #141414;
-																																																																																																																																																																																																																				color:#333;font-size: 3em;">NOS OFFRES SPÉCIALES !</h1>
-	<div class="morph d-flex justify-content-center">
-		<div class="row">
+	<h1 style="background-image: linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);
+																																									background-clip:text;
+																																								-webkit-background-clip:text;
+																																								color:transparent;
+																																								text-shadow: -2px -2px 2px rgba(0,0,0,0.79);
+																																								font-size: 3em;">NOS OFFRES SPÉCIALES !</h1>
+
+	<div class="row">
 
 
-			{% for p in products %}
-				<div class="col-md-6 col-lg-4">
+		{% for p in products %}
 
+			<div class="col-md-6 col-lg-4">
+				<div class="morph">
 					<div class="card align-items-center mx-2 bg-light">
+
 						<img src="/uploads/images/{{p.image}}" class="img-fluid" alt="Image du produit">
 					</div>
+
 					<div class=" card-body">
-						<h4 class="card-title mt-3">{{p.nom}}
+						<h4 class="card-title mt-3">{{p.nom | slice(0, 30) ~ '...'}}
 							({{p.prix}}
 							&euro;)</h4>
 						<h5>
@@ -29,16 +31,16 @@
 								{{p.getCategory().getNom()}}
 							</span>
 						</h5>
-						<p class="card-text">{{p.designation}}</p>
+						<p class="card-text" style="text-align: justify;">{{p.designation |slice(0, 250) ~ '...' }}</p>
 
 						<a href=" {{path('product_show', {'category_slug' : p.category.slug, 'slug': p.slug} )}}" class="btn btn-primary btn-sm">Détails</a>
 						<a href="{{path('panier_add', {'id': p.id })}}" class="btn btn-success btn-sm">Ajouter</a>
-
 					</div>
 				</div>
-			{% endfor %}
+			</div>
+		{% endfor %}
 
-		</div>
+
 	</div>
 
 	<hr>
@@ -48,7 +50,7 @@
 	<p>
 		<strong>Les 3 bonnes raisons de choisir PhoneShop</strong>
 	</p>
-	<div class="row d-flex justify-content-between" style="font-weight: 500;">
+	<div class="row d-flex justify-content-between">
 		{% include "shared/_assurance.html.twig" with {
 		            'color': '#ff33cc',
 		            'icone':'fas fa-truck',
