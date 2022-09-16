@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CategoryController extends AbstractController
 {
@@ -35,7 +36,7 @@ class CategoryController extends AbstractController
             }
             $em->persist($category);
             $em->flush();
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('category_show');
         }
         $formView = $form->createView();
 
@@ -75,5 +76,22 @@ class CategoryController extends AbstractController
             'category' => $category,
             'form' => $formView
         ]);
+    }
+    #[Route('/admin/category/list', name: 'category_show')]
+    public function show(EntityManagerInterface $em): Response
+    {
+        $category = $em->getRepository(Category::class)->findAll();
+        return $this->render('category/category_list.html.twig', [
+            'listeCategory' => $category
+        ]);
+    }
+    #[Route('/admin/category/{id}/delete', name: 'category_delete')]
+    public function delete($id, CategoryRepository $categoryRepository, EntityManagerInterface $em): Response
+    {
+        $category = $categoryRepository->find($id);
+        $em->remove($category);
+        $em->flush();
+
+        return new JsonResponse(['success' => 'La catégorie numéro ' . $id . ' a bien été supprimée !']);
     }
 }
