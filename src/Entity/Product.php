@@ -25,9 +25,6 @@ class Product
     #[ORM\Column]
     private ?float $prix = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $avis = null;
-
     #[ORM\Column]
     private ?float $tva = null;
 
@@ -46,9 +43,13 @@ class Product
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: CommandeDetails::class)]
     private Collection $commandeDetails;
 
+    #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Avis::class)]
+    private Collection $avis;
+
     public function __construct()
     {
         $this->commandeDetails = new ArrayCollection();
+        $this->avis = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -88,18 +89,6 @@ class Product
     public function setPrix(float $prix): self
     {
         $this->prix = $prix;
-
-        return $this;
-    }
-
-    public function getAvis(): ?string
-    {
-        return $this->avis;
-    }
-
-    public function setAvis(?string $avis): self
-    {
-        $this->avis = $avis;
 
         return $this;
     }
@@ -186,6 +175,36 @@ class Product
             // set the owning side to null (unless already changed)
             if ($commandeDetail->getProduct() === $this) {
                 $commandeDetail->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Avis>
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvis(Avis $avis): self
+    {
+        if (!$this->avis->contains($avis)) {
+            $this->avis[] = $avis;
+            $avis->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvis(Avis $avis): self
+    {
+        if ($this->avis->removeElement($avis)) {
+            // set the owning side to null (unless already changed)
+            if ($avis->getProduit() === $this) {
+                $avis->setProduit(null);
             }
         }
 
