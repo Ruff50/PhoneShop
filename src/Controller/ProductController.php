@@ -2,15 +2,15 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
 use App\Entity\Product;
+use App\Entity\Category;
 use App\Form\ProductType;
-use App\Repository\CategoryRepository;
+use Doctrine\ORM\Mapping\OrderBy;
 use App\Repository\ProductRepository;
 
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\CategoryRepository;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
 
 
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProductController extends AbstractController
 {
@@ -131,5 +132,35 @@ class ProductController extends AbstractController
         return $this->render('product/create.html.twig', [
             'form' => $formView
         ]);
+    }
+
+    /**
+     * @Route("admin/product/all", name="product_all")
+     */
+    public function productsAll(Request $request, SluggerInterface $slugger, EntityManagerInterface $em): Response
+    {
+        $limit = 10;
+        $page = (int)$request->query->get("page", 1);
+
+        $products = $em->getRepository('App\Entity\Product')->createQueryBuilder('p')
+            ->orderBy('p.id')
+            ->setFirstResult(($page * $limit) - $limit)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();;
+
+        $total = $em->getRepository('App\Entity\Product')->createQueryBuilder('p')
+            ->select('count(p.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        if ($products) {
+            return $this->render('product/product_list.html.twig', [
+                'listeProduits' => $products,
+                'limit' => $limit,
+                'total' => $total,
+                'page' => $page,
+            ]);
+        }
     }
 }
