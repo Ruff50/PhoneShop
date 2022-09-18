@@ -20,6 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ProductController extends AbstractController
 {
@@ -162,5 +163,15 @@ class ProductController extends AbstractController
                 'page' => $page,
             ]);
         }
+    }
+
+    #[Route('/admin/product/{id}/delete', name: 'product_delete')]
+    public function delete($id, ProductRepository $productRepository, EntityManagerInterface $em): Response
+    {
+        $product = $productRepository->find($id);
+        $em->remove($product);
+        $em->flush();
+
+        return new JsonResponse(['success' => 'Le produit numéro ' . $id . ' a bien été supprimé !']);
     }
 }
