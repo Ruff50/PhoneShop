@@ -17,15 +17,15 @@ document.addEventListener('DOMContentLoaded', function () {
 		let idUser = dataID.dataset.id;
 
 		if (idUser) {
-			let btnsuppr = document.querySelector('#btnSupprUser');
-			btnsuppr.dataset.user = idUser;
+			let btnsuppr = document.querySelector('#btnSupprArticle');
+			btnsuppr.dataset.article = idUser;
 
 
 			//let btnsuppr = document.querySelector('#btnSupprUser');	
 			btnsuppr.addEventListener("click",
 
 				function supprUser() {
-					let id = btnsuppr.dataset.user;
+					let id = btnsuppr.dataset.article;
 					ajx.open("GET", "/admin/product/" + id + "/delete");
 					ajx.send();
 					ajx.onreadystatechange = alertContents;
@@ -40,9 +40,9 @@ document.addEventListener('DOMContentLoaded', function () {
 									divAlert.innerHTML = data.success;
 									setTimeout(fenmodaldisparait, 4000);
 									function fenmodaldisparait() {
-										document.getElementById("deleteEmployeeModal").removeAttribute("show");
-										document.getElementById("deleteEmployeeModal").style.display = "none";
-										document.getElementById("deleteEmployeeModal").removeAttribute("dialog");
+										document.getElementById("deleteArticleModal").removeAttribute("show");
+										document.getElementById("deleteArticleModal").style.display = "none";
+										document.getElementById("deleteArticleModal").removeAttribute("dialog");
 										const elements = document.getElementsByClassName('modal-backdrop fade show');
 										Array.from(elements).forEach(element => element.classList.remove("show"));
 										dataID.remove();
