@@ -109,4 +109,38 @@
 
 			{% endfor %}
 			<li class={{ (page==pages) ? "disabled" : ''}}>
-				<a class="page-link"
+                          <a class="page-link" href="{{ (page<pages)? '?page='~(page +1): ''}}" aria-label="Next">
+                            <span aria-hidden="true">&#155;</span>
+                          </a>
+                    </li>
+                    <li class={{ (page==pages) ? "disabled" : ''}}>
+                          <a class="page-link" href="?page={{ pages }}" aria-label="Last">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                    </li>
+                </ul>   
+        	</nav>
+   	
+   	</div>
+   <!-- Delete Modal HTML -->
+<div class="modal fade" id="deleteArticleModal" tabindex="-1" aria-labelledby="supprunarticle" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+				<div class="modal-header">						
+					<h4 class="modal-title">Supprimer un Article</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">					
+					<p>Êtes-vous sûr de vouloir supprimer cet article ?</p>
+					<p class="text-warning"><small>Cette action est irréversible !</small></p>
+				</div>
+				<div id='alertSuppr' class= "alert alert-success" role="alert" style='display:none;'></div> 
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Annuler">
+					<input data-article="" data-dismiss="dialog" id="btnSupprArticle" type="submit" class="btn btn-danger" value="Supprimer">
+				</div>
+			
+		</div>
+	</div>
+</div>
+{% endblock %}
