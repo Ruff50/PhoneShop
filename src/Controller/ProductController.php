@@ -140,7 +140,7 @@ class ProductController extends AbstractController
      */
     public function productsAll(Request $request, SluggerInterface $slugger, EntityManagerInterface $em): Response
     {
-        $limit = 10;
+        $limit = 5;
         $page = (int)$request->query->get("page", 1);
 
         $products = $em->getRepository('App\Entity\Product')->createQueryBuilder('p')
