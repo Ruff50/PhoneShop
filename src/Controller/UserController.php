@@ -140,12 +140,10 @@ class UserController extends AbstractController
      */
     public function storeUser(ManagerRegistry $doctrine, UserPasswordHasherInterface $passwordHasher, Request $request, int $id): Response
     {
-        $request = Request::createFromGlobals();
-
         $entityManager = $doctrine->getManager();
         $user = $entityManager->getRepository('App\Entity\User')->find($id);
 
-        $user->setNom($request->get('name'));
+        $user->setFullName($request->query->get('name'));
 
         $user->setEmail($request->query->get('email'));
 
@@ -196,10 +194,10 @@ class UserController extends AbstractController
                     return new JsonResponse(['error' => 'Veuillez entrez deux fois le même mot de passe !']);
                 }
             } else {
-                return new JsonResponse(['error' => 'Votre mot de passe est incorrect !']);
+                return new JsonResponse(['error' => 'Votre nouveau mot de passe est incorrect !']);
             }
         } else {
-            return new JsonResponse(['error' => 'Votre nouveau mot de passe est incorrect !']);
+            return new JsonResponse(['error' => 'Votre mot de passe est incorrect !']);
         }
     }
     /**
