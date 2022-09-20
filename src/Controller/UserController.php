@@ -141,16 +141,12 @@ class UserController extends AbstractController
     public function storeUser(ManagerRegistry $doctrine, UserPasswordHasherInterface $passwordHasher, Request $request, int $id): Response
     {
         $request = Request::createFromGlobals();
-        $check = false;
+
         $entityManager = $doctrine->getManager();
         $user = $entityManager->getRepository('App\Entity\User')->find($id);
-        if ($user->getName() !== $request->query->get('name')) {
-            $check = true;
-        }
+
         $user->setNom($request->get('name'));
-        if ($user->getEmail() !== $request->query->get('email')) {
-            $check = true;
-        }
+
         $user->setEmail($request->query->get('email'));
 
         if ($request->query->get('role') == 'ROLE_USER') {

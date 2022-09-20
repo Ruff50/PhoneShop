@@ -61,7 +61,7 @@
 								</td>
 							</tr>
 						{% endfor %}
-						{% else%}
+					{% else %}
 						<tr data-id="{{ listeUsers.id }}">
 							<td>{{ listeUsers.fullName }}</td>
 							<td>{{ listeUsers.email }}</td>
@@ -77,103 +77,102 @@
 								</span>
 							</td>
 						</tr>
-						{% endif%}</tbody>
+					{% endif %}
 				</tbody>
-			</table>
-			<div class="float-end">
-				<button type="button" class="btn btn-secondary" onclick="history.go(-1)">Retour</button>
-				{% if is_granted('ROLE_SUPER_ADMIN') %}
-					<a href="#" class="btn btn-primary" id="ajtUtil" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewbox="0 0 16 16">
-							<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-							<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-						</svg>
-						<span class="mx-2">Ajouter un Nouvel Utilisateur</span>
-					</a>
+			</tbody>
+		</table>
+		<div class="float-end">
+			<button type="button" class="btn btn-secondary" onclick="history.go(-1)">Retour</button>
+			{% if is_granted('ROLE_SUPER_ADMIN') %}
+				<a href="#" class="btn btn-primary" id="ajtUtil" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewbox="0 0 16 16">
+						<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+						<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+					</svg>
+					<span class="mx-2">Ajouter un Nouvel Utilisateur</span>
+				</a>
 
-				{% endif %}
-
-			</div>
+			{% endif %}
 
 		</div>
+
 	</div>
+</div>
 
-	<!-- Add Modal HTML -->
-	<div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="ajouterunuser" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<section class="text-start">
-					<div class="modal-header">
-						<h4 class="modal-title" id="toggle-t">Ajouter un Utilisateur</h4>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true" aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<div class="form-group">
-							<label>Nom</label>
-							<input type="text" class="form-control" name="name" id="inpname" required>
-
-						</div>
-						<div class="form-group">
-							<label>Email</label>
-							<input type="email" class="form-control" name="email" id="inpemail" required>
-						</div>
-						<div class="form-group">
-							<label for="motDePasse">Mot de passe</label>
-							<input type="password" class="form-control mb-1" id="motDePasse" name="motDePasse" placeholder="Password" required>
-
-						</div>
-						<div class="form-group" id="toggle-div" style='display:none;'>
-							<label for="NewmotDePasse">Nouveau Mot de passe</label>
-							<input type="password" class="form-control mb-1" id="NewmotDePasse" name="NewmotDePasse" placeholder="Password">
-
-						</div>
-						<div class="form-group">
-							<label for="repeatMotDePasse">Répetez le mot de passe</label>
-							<input type="password" class="form-control mb-1" id="repeatMotDePasse" name="repeatMotDePasse" placeholder="Password" required>
-						</div>
-						<div class="form-group">
-							<select class="form-select mb-2" aria-label="Default select example" name="role" id="selrole" required>
-								<option value="ROLE_USER" selected>Sélectioner un rôle</option>
-								<option value="ROLE_SUPER_ADMIN">Administrateur</option>
-								<option value="ROLE_MOD">Modérateur</option>
-								<option value="ROLE_CLI">Client</option>
-							</select>
-						</div>
-					</div>
-
-					<div id="alertEdit" class="alert alert-danger" role="alert" style="display:none;"></div>
-
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Annuler">
-						<input id="ajout-btn" type="submit" name="submit" class="btn btn-primary" value="Ajouter">
-						<input id="modif-btn" type="submit" name="submit" class="btn btn-primary" value="Modifier" style="display:none;">
-					</div>
-				</section>
-			</div>
-		</div>
-	</div>
-	<!-- Delete Modal HTML -->
-	<div class="modal fade" id="deleteEmployeeModal" tabindex="-1" aria-labelledby="supprunuser" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
+<!-- Add Modal HTML -->
+<div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="ajouterunuser" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<section class="text-start">
 				<div class="modal-header">
-					<h4 class="modal-title">Supprimer un Utilisateur</h4>
+					<h4 class="modal-title" id="toggle-t">Ajouter un Utilisateur</h4>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<p>Êtes-vous sûr de vouloir supprimer cet utilisateur ?</p>
-					<p class="text-warning">
-						<small>Cette action est irréversible !</small>
-					</p>
+					<div class="form-group">
+						<label>Nom</label>
+						<input type="text" class="form-control" name="name" id="inpname" required>
+
+					</div>
+					<div class="form-group">
+						<label>Email</label>
+						<input type="email" class="form-control" name="email" id="inpemail" required>
+					</div>
+					<div class="form-group">
+						<label for="motDePasse">Mot de passe</label>
+						<input type="password" class="form-control mb-1" id="motDePasse" name="motDePasse" placeholder="Password" required>
+
+					</div>
+					<div class="form-group" id="toggle-div" style='display:none;'>
+						<label for="NewmotDePasse">Nouveau Mot de passe</label>
+						<input type="password" class="form-control mb-1" id="NewmotDePasse" name="NewmotDePasse" placeholder="Password">
+
+					</div>
+					<div class="form-group">
+						<label for="repeatMotDePasse">Répetez le mot de passe</label>
+						<input type="password" class="form-control mb-1" id="repeatMotDePasse" name="repeatMotDePasse" placeholder="Password" required>
+					</div>
+					<div class="form-group">
+						<select class="form-select mb-2" aria-label="Default select example" name="role" id="selrole" required>
+							<option value="ROLE_USER" selected>Sélectioner un rôle</option>
+							<option value="ROLE_SUPER_ADMIN">Administrateur</option>
+							<option value="ROLE_MOD">Modérateur</option>
+							<option value="ROLE_CLI">Client</option>
+						</select>
+					</div>
 				</div>
-				<div id='alertSuppr' class="alert alert-success" role="alert" style='display:none;'></div>
+
+				<div id="alertEdit" class="alert alert-danger" role="alert" style="display:none;"></div>
+
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Annuler">
-					<input data-user="" data-dismiss="dialog" id="btnSupprUser" type="submit" class="btn btn-danger" value="Supprimer">
+					<input id="ajout-btn" type="submit" name="submit" class="btn btn-primary" value="Ajouter">
+					<input id="modif-btn" type="submit" name="submit" class="btn btn-primary" value="Modifier" style="display:none;">
 				</div>
-
-			</div>
+			</section>
 		</div>
 	</div>
+</div>
+<!-- Delete Modal HTML -->
+<div class="modal fade" id="deleteEmployeeModal" tabindex="-1" aria-labelledby="supprunuser" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Supprimer un Utilisateur</h4>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>Êtes-vous sûr de vouloir supprimer cet utilisateur ?</p>
+				<p class="text-warning">
+					<small>Cette action est irréversible !</small>
+				</p>
+			</div>
+			<div id='alertSuppr' class="alert alert-success" role="alert" style='display:none;'></div>
+			<div class="modal-footer">
+				<input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Annuler">
+				<input data-user="" data-dismiss="dialog" id="btnSupprUser" type="submit" class="btn btn-danger" value="Supprimer">
+			</div>
 
-</div>{% endblock %}
+		</div>
+	</div>
+</div></div>{% endblock %}
