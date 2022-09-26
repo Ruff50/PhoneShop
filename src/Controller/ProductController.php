@@ -138,7 +138,7 @@ class ProductController extends AbstractController
     /**
      * @Route("admin/product/all", name="product_all")
      */
-    public function productsAll(Request $request, SluggerInterface $slugger, EntityManagerInterface $em): Response
+    public function productsAll(Request $request, EntityManagerInterface $em): Response
     {
         $limit = 5;
         $page = (int)$request->query->get("page", 1);
@@ -148,7 +148,7 @@ class ProductController extends AbstractController
             ->setFirstResult(($page * $limit) - $limit)
             ->setMaxResults($limit)
             ->getQuery()
-            ->getResult();;
+            ->getResult();
 
         $total = $em->getRepository('App\Entity\Product')->createQueryBuilder('p')
             ->select('count(p.id)')
